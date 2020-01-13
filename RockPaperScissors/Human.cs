@@ -17,6 +17,7 @@ namespace RockPaperScissors
         }
         public override void ChooseGesture(List<Gesture> gestures)
         {
+            bool running = true;
             do
             {
                 Console.WriteLine("\nWhich gesture whould " + name + " like to make?");
@@ -30,21 +31,19 @@ namespace RockPaperScissors
 
                 foreach (Gesture gesture in gestures)
                 {
-                    if (gesture.name == input)
+                    if (gesture.name.ToLower() == input.ToLower())
                     {
                         gestureChoice = gesture;
+                        running = false;
                         break;
                     }
                 }
-                if(input == "")
+                if(running)
                 {
                     Console.WriteLine("Please enter a valid option");
                     continue;
                 }
-                else
-                {
-                    break;
-                }
+                break;
             } while (true);
         }
     }
