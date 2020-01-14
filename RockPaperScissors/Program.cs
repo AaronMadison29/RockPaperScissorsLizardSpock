@@ -17,7 +17,8 @@ namespace RockPaperScissors
 
             do
             {
-                (playerOne, playerTwo) = newGame.SetPlayers();
+                string players = newGame.CheckPlayers();
+                (playerOne, playerTwo) = newGame.SetPlayers(players);
 
                 newGame.RunGame(playerOne, playerTwo);
 

@@ -26,12 +26,26 @@ namespace RockPaperScissors
 
         }
 
-        public (Player, Player) SetPlayers()
+        public string CheckPlayers()
+        {
+            Console.WriteLine("How many players?: ");
+            string players = Console.ReadLine();
+            if(players == "0" || players == "1" || players == "2")
+            {
+                return players;
+            }
+            else
+            {
+                Console.WriteLine("Please enter a valid option");
+                return CheckPlayers();
+            }
+        }
+
+        public (Player, Player) SetPlayers(string players)
         {
             while (true)
             {
-                Console.WriteLine("How many players?: ");
-                string players = Console.ReadLine();
+                
 
                 if (players == "2")
                 {
@@ -61,11 +75,6 @@ namespace RockPaperScissors
                     Console.WriteLine();
                     return (playerOne, playerTwo);
                 }
-                else
-                {
-                    Console.WriteLine("Please enter a valid option");
-                    continue;
-                }
             }
         }
 
@@ -79,8 +88,6 @@ namespace RockPaperScissors
             {
                 Console.Clear();
                 Console.WriteLine(playerOne.name + "(" + playerOne.gestureChoice.name + ")" + " beat " + playerTwo.name + "(" + playerTwo.gestureChoice.name + ")");
-                Console.WriteLine("Press enter to start next round.");
-                Console.ReadLine();
                 playerOne.score++;
                 return playerOne;
             }
@@ -88,8 +95,6 @@ namespace RockPaperScissors
             {
                 Console.Clear();
                 Console.WriteLine(playerTwo.name + "(" + playerTwo.gestureChoice.name + ")" + " beat " + playerOne.name + "(" + playerOne.gestureChoice.name + ")");
-                Console.WriteLine("Press enter to start next round.");
-                Console.ReadLine();
                 playerTwo.score++;
                 return playerTwo;
             }
@@ -115,20 +120,21 @@ namespace RockPaperScissors
                 if (winner is null)
                 {
                     Console.WriteLine(playerTwo.name + "(" + playerTwo.gestureChoice.name + ")" + " tied " + playerOne.name + "(" + playerOne.gestureChoice.name + ")\n");
+                    Console.WriteLine("Press enter to start next round.");
+                    Console.ReadLine();
                 }
-                else if(winner.score == 2)
+                else if (winner.score == 2)
                 {
+                    Console.WriteLine("\n" + winner.name + " is the winner!\n");
                     break;
                 }
                 else
                 {
+                    Console.WriteLine("Press enter to start next round.");
+                    Console.ReadLine();
                     continue;
                 }
-
             } while (true);
-
-            Console.Clear();
-            Console.WriteLine("\n" + winner.name + " is the winner!\n");
         }
     }
 }
